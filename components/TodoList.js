@@ -1,6 +1,6 @@
-import { Component } from "react";
-import { FlatList, View, Text} from "react-native";
-import { Button } from "react-native";
+import react, {Component} from "react";
+import { Button, Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList } from "react-native";
 
 
 export default class TodoList extends Component{
@@ -8,12 +8,7 @@ export default class TodoList extends Component{
     //propriedades da lista (Linhas)
     static defaultProps = {
         list:[
-            {
-                id: '1' , text: "André"
-            },
-            {
-                id: '2' , text: "Jorjão"
-            }
+            
         ],
 
         OnRemove: () => {}
@@ -22,11 +17,11 @@ export default class TodoList extends Component{
     //função que trata as linhas dentro da lista
     handleRow = ({item,index}) =>{
         return(
-            <View  style={{flexDirection: 'row', margin: 10}}>
+            <View style={{flexDirection: 'row', margin: 10}}>
                 <Text style={{flex:1}}>
                     {this.formatListNumber(index)} - {item.text}
                 </Text>
-                <Button style={{width: 30}} title="X" onPress={() => this.props.onRemove(item)}></Button>
+                <Pressable title="X" style={this.styles.botao} onPress={() => this.props.onRemove(item)}><Text style={{color: "white"}}>X</Text></Pressable>
             </View>
             )
         
@@ -53,4 +48,10 @@ export default class TodoList extends Component{
         </View>
         )
     }
+
+    styles = StyleSheet.create({
+        botao: {
+            width: 30, height: 30,backgroundColor:"#0062ac", alignItems:"center", justifyContent:"center", borderRadius:10
+        },
+      })
 }
